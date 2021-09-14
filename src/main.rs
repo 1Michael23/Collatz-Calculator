@@ -1,19 +1,12 @@
 // used to compute the collatz conjecture
 
-use std::io;
+use clap::{App, Arg};
+
 fn main() {
     
-    println!("Please Input A Number:");
-    
-    let mut input = String::new();
-    io::stdin()
-        .read_line(&mut input)
-        .expect("failed to read input.");
+    let number = App::new("Collatz-Calculator").arg(Arg::with_name("input").index(1).takes_value(true).required(true)).get_matches();
 
-
-
-    let mut input: u128 = input.trim().parse().expect("invalid input");
-
+    let mut input: u128 = number.value_of("input").unwrap().trim().parse().expect("invalid input");
 
     while input !=1 {
 
